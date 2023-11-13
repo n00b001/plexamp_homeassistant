@@ -73,3 +73,21 @@ I have created automations to turn on my Receiver if PlexAmp is playing.  Or to 
 
 ## Things to note
 I only have one PlexAmp so I don't have any device checks within the Python code.  If you have multiple PlexAmps, I suspect playing any of them will make the toggle switch to 'on'.  You may be able to work around this by adding some python code to check device ID
+
+There are also the following PlexAmp APIs that may be helpful to you:
+- /resources (which is for Plex discovery protocol GDM)
+- /player/playback/play
+- /player/playback/pause
+- /player/playback/stop
+- /player/playback/skipNext
+- /player/playback/skipPrevious
+- /player/playback/playPause
+- /player/playback/playMedia????
+- /player/playback/createPlayQueue????
+- /player/playback/seekTo?offset=1
+- /player/playback/skipTo?key=???&playQueueItemID=???
+- /player/playback/setParameters?repeat=???
+- /player/playback/setParameters?volume=0
+- /player/playback/setParameters?volume=100
+- /player/playback/setParameters?shuffle=(true/false)
+- /player/playback/setParameters?speed=???
