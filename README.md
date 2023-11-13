@@ -14,4 +14,62 @@ Homeassistant OS: `bash -c "$(wget -qLO - https://github.com/tteck/Proxmox/raw/m
 https://www.home-assistant.io/integrations/plex/
 
 ## My own 'integration'
-<to do>
+
+### For HomeAssistant:
+
+1. Download `get_plexamp_playing_status.py`
+2. Move it to /config/python_scripts/.
+3. Add to your /config/configuration.yaml:
+```
+shell_command:
+    get_plexamp_playing_status: /config/python_scripts/get_plexamp_playing_status.py <plexamp_ip>
+```
+
+Create a Toggle helper from the HomeAssistant UI:
+1. Go to Settings
+2. Devices & Services
+3. Helpers tab
+4. Create helper
+5. Toggle
+6. Name it 'is plexamp playing'
+
+Create an automation
+1. Add a time pattern trigger for every second * * *
+2. Add an action to call a service.  Call a shel command 'get_plexamp_playing_status'.  Add response variable to 'is_plexamp_playing'
+3. Add an action, if/then/else. Within the 'if', create a template, use this: `{{ is_plexamp_playing['stdout'] == '1' }}`. Within the 'then' call service 'input boolean: turn on' and select 'input_boolean.is_plexamp_playing'. Do the same for the else (but you're calling service 'input boolean: turn off'
+4. Here is the yaml:
+```
+alias: get plexamp playing status
+description: ""
+trigger:
+  - platform: time_pattern
+    hours: "*"
+    minutes: "*"
+    seconds: "*"
+condition: []
+action:
+  - service: shell_command.get_plexamp_playing_status
+    data: {}
+    response_variable: is_plexamp_playing
+  - if:
+      - condition: template
+        value_template: "{{ is_plexamp_playing['stdout'] == '1' }}"
+    then:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.is_plexamp_playing
+    else:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.is_plexamp_playing
+mode: single
+```
+
+## Summary
+Now you have a toggle that will turn on and off when you're playing music on PlexAmp.  
+I have created automations to turn on my Receiver if PlexAmp is playing.  Or to pause PlexAmp if the Receiver source is changed (using the Plex/HomeAssistant integration)
+
+## Things to note
+I only have one PlexAmp so I don't have any device checks within the Python code.  If you have multiple PlexAmps, I suspect playing any of them will make the toggle switch to 'on'.  You may be able to work around this by adding some python code to check device ID
