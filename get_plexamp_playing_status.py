@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
-import requests
 import xml.etree.ElementTree as ET
 import sys
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+try:
+    import requests
+except:
+    install("requests")
+    import requests
 
 if len(sys.argv) == 1:
     raise Exception(f"Must provide positional argument: IP.  {sys.argv[0]} <IP>")
