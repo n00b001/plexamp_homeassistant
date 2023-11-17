@@ -73,7 +73,8 @@ Now you have a toggle that will turn on and off when you're playing music on Ple
 I have created automations to turn on my Receiver if PlexAmp is playing.  Or to pause PlexAmp if the Receiver source is changed (using the Plex/HomeAssistant integration)
 
 ## Things to note
-I only have one PlexAmp so I don't have any device checks within the Python code.  If you have multiple PlexAmps, I suspect playing any of them will make the toggle switch to 'on'.  You may be able to work around this by adding some python code to check device ID
+I only have one PlexAmp so I don't have any device checks within the Python code.  If you have multiple PlexAmps, I suspect playing any of them will make the toggle switch to 'on'.  You may be able to work around this by adding some python code to check device ID.
+I've not specified how to use the 'pause_plexamp.py' script in an automation (because I'm assuming that will be different for different people), but it should be straightforward enough.  When you call the script, plexamp should get paused
 
 There are also the following PlexAmp APIs that may be helpful to you:
 - /resources (which is for Plex discovery protocol GDM)
