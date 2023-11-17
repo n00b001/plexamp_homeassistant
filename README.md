@@ -17,12 +17,13 @@ https://www.home-assistant.io/integrations/plex/
 
 ### For HomeAssistant:
 
-1. Download `get_plexamp_playing_status.py`
-2. Move it to /config/python_scripts/.
+1. Download the directory: `python_scripts`
+2. Move the contents to /config/python_scripts/.
 3. Add to your /config/configuration.yaml:
 ```
 shell_command:
     get_plexamp_playing_status: /config/python_scripts/get_plexamp_playing_status.py <plexamp_ip>
+    pause_plexamp: /config/python_scripts/pause_plexamp.py <plexamp_ip>
 ```
 
 Create a Toggle helper from the HomeAssistant UI:
