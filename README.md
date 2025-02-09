@@ -1,3 +1,13 @@
+# update 2025
+You can use the plex integration: https://www.home-assistant.io/integrations/plex/
+This will display both your plexamp server, and plexamp clients
+You can then see the play/pause status of the plexamp server, as well as pause/resume playback
+
+I can't remember why this didn't work for me before (which lead to the creation of this repo)
+It might be something to do with 'scanning for clients': https://www.home-assistant.io/integrations/plex/#button (I have an automation to 'press' that button every minute)
+
+I'll leave the old information, just in case :)
+
 # plexamp_homeassistant
 A guide mainly to myself for how to connect PlexAmp and HomeAssistant
 
